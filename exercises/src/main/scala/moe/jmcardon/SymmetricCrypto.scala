@@ -86,8 +86,12 @@ object SymmetricCrypto {
     //Encrypt one plaintext of your choice, and then user it
     // Plaintexts are utf8 encoded, so use .utf8Bytes to get String => Array[Byte]
     // and .toUtf8String to get Array[Byte] => String
-    val myPlainText = ???
+    val myPlainText = "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+    val myCT = encryptPT(myPlainText)
 
+    printDecrypted(xor(xor(myCT, ToDecipher1.hexBytesUnsafe), myPlainText.utf8Bytes))
+    printDecrypted(xor(xor(myCT, ToDecipher2.hexBytesUnsafe), myPlainText.utf8Bytes))
+    printDecrypted(xor(xor(myCT, ToDecipher3.hexBytesUnsafe), myPlainText.utf8Bytes))
 
   }
 

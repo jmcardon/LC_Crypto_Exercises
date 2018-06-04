@@ -37,7 +37,7 @@ object JWTAuth {
       expiration <- IO(Instant.now.plusSeconds(20))
       subset = SubsetJWT(JWTClaims(expiration = Some(expiration)))
       parsed <- subset.check(k)
-    } yield parsed.body.expiration.exists(_.equals(expiration))
+    } yield parsed.body.expiration.exists(e => e.equals(expiration) || e.isBefore(expiration))
 
     println(s"Result: ${program.unsafeRunSync()}")
   }

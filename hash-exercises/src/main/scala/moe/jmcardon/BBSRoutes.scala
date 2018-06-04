@@ -41,6 +41,9 @@ final class BBSRoutes(sem: Semaphore[IO],
     case POST -> Root / "message" / from / message =>
       messages.modify(BBSMessage(message, from) :: _) >> Ok()
 
+    case GET -> Root / "printchain" =>
+      dogeChain.get.flatMap(c => IO(println(c))) >> Ok()
+
     case POST -> Root / "doWork" =>
       lastblock.get.flatMap {
         case None => BadRequest("Tick not called yet")

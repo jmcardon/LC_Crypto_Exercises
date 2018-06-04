@@ -23,7 +23,9 @@ case class SubsetJWT(claims: JWTClaims) {
   }
 
   def calculate(toSign: String,
-                k: MacSigningKey[HMACSHA256]): IO[MAC[HMACSHA256]] = ???
+                k: MacSigningKey[HMACSHA256]): IO[MAC[HMACSHA256]] = {
+    HMACSHA256.sign[IO](toSign.asciiBytes, k)
+  }
 
 }
 
